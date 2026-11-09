@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SurplusPK – B2B Surplus Inventory Marketplace</title>
+<style>
+:root{--navy:#172B4D;--green:#18A66A;--action:#0E7C4F;--s1:4px;--s2:8px;--s3:16px;--s4:24px;--s5:32px;--s6:48px;--t-display:clamp(30px,6vw,48px);--t-h2:26px;--t-body:16px;--t-small:14px;--t-label:13px;--t-num:22px;--btn-bg:var(--action);--btn-fg:#fff;--card-bg:var(--surface);--ok:#0E7C4F;--warn:#8a5a00;--err:#b42318;--bg:#F7F8F5;--surface:#fff;--text:#172B4D;--muted:#5b6b82;--line:#dfe3da;--head:#172B4D;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a2e;--surface:#172B4D;--text:#F7F8F5;--muted:#a9b6cb;--line:#2c4166;--head:#0a1322;--ok:#5fd3a0;--warn:#f5c26b;--err:#ff8a80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1a2e;--surface:#172B4D;--text:#F7F8F5;--muted:#a9b6cb;--line:#2c4166;--head:#0a1322;--ok:#5fd3a0;--warn:#f5c26b;--err:#ff8a80;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:inherit}
+header{background:var(--head);color:#F7F8F5}
+.bar,.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+.bar{display:flex;align-items:center;gap:18px;height:58px}
+.brand{font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.3px}.brand b{color:var(--green)}
+nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto}
+nav a{padding:8px 11px;text-decoration:none;font-size:14px;white-space:nowrap;border-radius:4px;opacity:.85}
+nav a:hover{opacity:1;background:rgba(255,255,255,.1)}
+.btn{display:inline-block;background:var(--btn-bg);color:var(--btn-fg);border:0;padding:12px 20px;font:600 15px system-ui,sans-serif;border-radius:4px;text-decoration:none;cursor:pointer;transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.alt{background:transparent;border:1.5px solid currentColor}
+.hero{background:var(--head);color:#F7F8F5;padding:56px 0 48px}
+.hero h1{font-size:var(--t-display);line-height:1.1;margin:0 0 14px;letter-spacing:-1px;max-width:680px}
+.hero p{max-width:560px;opacity:.85;margin:0 0 22px;font-size:18px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.sbox{display:flex;gap:8px;margin-top:26px;max-width:560px}
+input,select,textarea{font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:11px 12px;width:100%}
+.sbox input{color:#172B4D;background:#fff}
+section{padding:var(--s5) 0}
+h2{font-size:var(--t-h2);margin:0 0 6px;letter-spacing:-.5px}
+.sub{color:var(--muted);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--s3)}
+.card{background:var(--card-bg);border:1px solid var(--line);border-radius:6px;overflow:hidden;text-decoration:none;display:block;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(23,43,77,.15)}
+.tile{position:relative;overflow:hidden;height:110px;display:flex;align-items:flex-end;padding:10px;color:#fff;font-weight:700;font-size:13px;background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 10px,transparent 10px 20px)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cb{padding:var(--s3)}.cb h3{font-size:16px;margin:0 0 8px;line-height:1.3}
+.price{font-size:var(--t-num);font-weight:800}.price s{font-size:14px;font-weight:400;color:var(--muted);margin-left:6px}
+.meta{color:var(--muted);font-size:13.5px;margin-top:6px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:5px;background:var(--line);color:var(--text)}
+.tag.v{background:var(--action);color:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:9px 14px;border:1px solid var(--line);background:var(--surface);border-radius:4px;text-decoration:none;font-size:14px;font-weight:600}
+.chip:hover{border-color:var(--green)}
+.steps{counter-reset:s;display:grid;gap:10px;padding:0;list-style:none;margin:0}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px 12px 52px;position:relative}
+.steps li:before{content:counter(s);position:absolute;left:14px;top:11px;width:26px;height:26px;border-radius:50%;background:var(--action);color:#fff;font-weight:700;text-align:center;line-height:26px;font-size:14px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px;align-items:center}
+.filters label{display:flex;gap:8px;align-items:center;font-size:14px}.filters input[type=checkbox]{width:auto}
+form{display:grid;gap:12px;max-width:560px}label.f{font-size:14px;font-weight:600;display:grid;gap:5px}
+.note{border-left:4px solid var(--green);background:var(--surface);padding:12px 14px;border-radius:4px;font-size:14px;margin:0 0 20px}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.big div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px}.big small{color:var(--muted);display:block}.big b{font-size:20px}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface)}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}td .btn{padding:6px 10px;font-size:13px;margin:2px}h3{margin:0 0 10px}
+.strip{background:var(--action);color:#fff;text-align:center;font-size:13px;padding:6px 12px}
+.skip{position:absolute;left:-999px;top:0;background:#fff;color:#172B4D;padding:10px 14px;z-index:9}.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}main:focus{outline:none}
+[hidden]{display:none!important}
+.btn:active{transform:scale(.98)}input[readonly]{background:var(--line)}input:disabled,select:disabled{opacity:.6}
+.mt{display:none;margin-left:auto;background:transparent;color:inherit;border:1px solid rgba(255,255,255,.4);border-radius:4px;padding:8px 14px;font:600 14px system-ui}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+input:user-invalid,select:user-invalid{border-color:var(--err)}
+.st-Published{border:1px solid var(--ok);color:var(--ok);background:transparent}.st-Reserved,.st-Pending{border:1px solid var(--warn);color:var(--warn);background:transparent}.st-Sold{border:1px solid var(--err);color:var(--err);background:transparent}
+.fdet summary{cursor:pointer;font-weight:600;padding:10px 0}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:12px}legend{font-weight:700;margin-bottom:8px}
+.prog{height:6px;background:var(--line);border-radius:3px}.prog i{display:block;height:100%;width:33%;background:var(--action);border-radius:3px;transition:width .2s}
+@media(max-width:640px){.rt tr:has(th){display:none}.rt tr{display:block;border:1px solid var(--line);border-radius:6px;margin:0 0 10px;padding:6px}.rt td{display:flex;justify-content:space-between;gap:12px;border:0}.rt td:before{content:attr(data-l);font-weight:600;color:var(--muted)}}
+@media(max-width:640px){.bar{flex-wrap:wrap;padding-top:8px;padding-bottom:8px}.mt{display:block}nav{display:none;width:100%;flex-direction:column;margin:0}nav.open{display:flex}nav a{padding:12px}.rt td .btn{padding:10px 14px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+footer{background:var(--head);color:#F7F8F5;padding:28px 0;font-size:14px;opacity:.95}
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script></head><body>
+<header><div class="bar"><a class="brand" href="#home">Surplus<b>PK</b></a>
+<button class="mt" id="mt" aria-expanded="false" aria-controls="nv">Menu</button><nav id="nv" aria-label="Main"><a href="#home">Home</a><a href="#market">Marketplace</a><a href="#sell">Sell surplus</a><a href="#how">How it works</a><a href="#dash">Dashboard</a></nav></div></header>
+<div class="strip">Early prototype · demo listings and businesses · your feedback decides what gets built</div>
+<a class="skip" href="#app" onclick="event.preventDefault();document.getElementById('app').focus()">Skip to content</a>
+<main id="app" tabindex="-1"></main>
+<footer><div class="wrap">SurplusPK is a design prototype. All businesses and listings are demonstration data.</div></footer>
+<script>
+// ---- SETUP: paste your Supabase values between the quotes (see README.md) ----
+const SUPABASE_URL="https://hfvniekvphwahhadyakf.supabase.co",SUPABASE_KEY="sb_publishable_hn6Y74YJII8KrvEgp7ifsQ_fFGVyaa4";
+const sb=(SUPABASE_URL&&SUPABASE_KEY&&window.supabase)?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+async function send(table,row,el,form){
+ if(!sb){el.textContent="The database is not connected yet, so nothing was recorded.";return false}
+ const bt=el.closest("form")?.querySelector("button[type=submit],button:not([type])");if(bt)bt.disabled=true;el.setAttribute("role","status");el.textContent="Sending…";
+ try{const{error}=await sb.from(table).insert(row);
+  if(error){console.error(error);el.textContent="We couldn’t send that. Please check your details and try again in a moment.";return false}
+  el.textContent="Received, thank you. We will get back to you.";if(form)form.reset();return true}
+ catch(x){el.textContent="Could not reach the database. Please try again.";return false}finally{if(bt)bt.disabled=false}}
+const CATS=["Textile & fabrics","Clothing & apparel","Footwear","Furniture","Electronics","Industrial supplies","Packaging materials","Other wholesale"];
+const COL=["#1d6f8a","#7a3e8e","#a2542a","#6b5a3a","#2c5aa0","#4b5563","#8a6d1d","#2f7a5b"];
+const CITIES=["Lahore","Karachi","Faisalabad","Sialkot","Gujranwala","Islamabad"];
+const D=[
+["d1","Unprinted cotton lawn fabric",0,"Faisalabad",5000,"metres",500,380,520,"New, unused","Al-Noor Textiles",1,"2 days ago"],
+["d2","Men’s polo shirts, mixed sizes (export surplus)",1,"Lahore",4200,"pieces",300,640,900,"New, grade B","Rehman Garments",1,"3 days ago"],
+["d3","Ladies jeans, mixed wash (export leftover)",1,"Karachi",3000,"pieces",200,1150,1600,"New, grade A","Karachi Denim Co.",1,"5 days ago"],
+["d4","Training footballs, size 5",7,"Sialkot",2500,"pieces",100,850,1300,"New, boxed","Sialkot Sports Works",1,"1 week ago"],
+["d5","Casual sneakers, discontinued colourway",2,"Gujranwala",1800,"pairs",60,1450,2200,"New, boxed","Star Footwear",0,"1 week ago"],
+["d6","Ergonomic office chairs, boxed",3,"Lahore",220,"pieces",10,9800,14500,"New, boxed","Metro Furnishers",1,"4 days ago"],
+["d7","LED panel lights 18W (20 per carton)",4,"Karachi",340,"cartons",10,6200,8400,"New, sealed","Bright Trade House",0,"6 days ago"],
+["d8","5-ply corrugated cartons, bulk",6,"Faisalabad",12000,"pieces",1000,95,140,"New","Punjab Packaging",1,"2 weeks ago"],
+["d9","Assorted stainless steel fasteners",5,"Islamabad",1400,"kg",100,410,600,"New, mixed","Capital Industrial Supply",0,"2 weeks ago"]
+].map(a=>({id:a[0],t:a[1],c:a[2],city:a[3],q:a[4],u:a[5],moq:a[6],p:a[7],was:a[8],cond:a[9],s:a[10],v:a[11],d:a[12],demo:1}));
+D[2].st="Reserved";D[5].st="Sold";
+const $=s=>document.querySelector(s),app=$("#app");
+const rs=n=>"Rs "+Number(n).toLocaleString("en-PK");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||"[]");localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return v===undefined?[]:false}}
+const all=()=>store("mine").concat(D);
+let q="",cat="";
+const card=i=>`<a class="card" href="#item-${i.id}"><div class="tile" style="background-color:${COL[i.c]}">${CATS[i.c]}${i.demo?`<img src="images/${i.id}.jpg" alt="${esc(i.t)}" loading="lazy" onerror="this.remove()">`:""}</div><div class="cb"><div>${i.v?'<span class="tag v">Verified</span>':''}<span class="tag">${i.demo?'Demo':'Your demo listing'}</span><span class="tag st-${(i.st||"Published").split(" ")[0]}">${i.st||"Published"}</span></div><h3>${esc(i.t)}</h3><div class="price">${rs(i.p)}<s>${rs(i.was)}</s></div><div class="meta">per ${i.u.replace(/s$/,"")} · MOQ ${Number(i.moq).toLocaleString("en-PK")} ${i.u}<br>${Number(i.q).toLocaleString("en-PK")} ${i.u} available · ${i.city}</div></div></a>`;
+const opts=a=>a.map(x=>`<option>${x}</option>`).join("");
+const pages={
+home(){const f=all().slice(0,3);return `<div class="hero"><div class="wrap"><h1>Turn Excess Inventory Into Business Opportunities.</h1><p>Discover verified surplus stock, connect with suppliers and unlock better wholesale deals across Pakistan.</p><div class="row"><a class="btn" href="#market">Explore Inventory</a><a class="btn alt" href="#sell">Sell Your Surplus</a></div><form class="sbox" id="hs"><input id="hq" aria-label="Search inventory" placeholder="Search fabric, jeans, chairs…"><button class="btn">Search</button></form></div></div>
+<section><div class="wrap"><h2>Popular categories</h2><p class="sub">Eight categories to start with.</p><div class="chips">${CATS.map((c,i)=>`<a class="chip" href="#market" data-cat="${i}">${c}</a>`).join("")}</div></div></section>
+<section style="padding-top:0"><div class="wrap"><h2>Recently added deals</h2><p class="sub">Demonstration listings, priced in PKR.</p><div class="grid">${f.map(card).join("")}</div></div></section>
+<section><div class="wrap two"><div><h2>For buyers</h2><p class="sub">Find stock below wholesale price, compare by city, quantity and price, and send an enquiry with your offer.</p></div><div><h2>For sellers</h2><p class="sub">Turn warehouse stock into cash. List photos, quantity, minimum order and asking price in a few minutes.</p></div></div></section>
+<section style="padding-top:0"><div class="wrap"><h2>Tell us what you need</h2><p class="sub">SurplusPK is an early prototype. Join the list and tell us whether you buy or sell surplus stock, and what would make this useful.</p><form id="ea"><input name="contact" aria-label="Email or WhatsApp number" required maxlength="200" placeholder="Email or WhatsApp number"><select name="role"><option value="buyer">I buy stock</option><option value="seller">I have surplus to sell</option><option value="other">Just curious</option></select><textarea name="message" aria-label="Your message" rows="3" maxlength="1000" placeholder="What do you buy or sell? What would you want from this?"></textarea><button class="btn">Join the list</button><p class="meta" id="eam">We store only what you type here, to follow up about SurplusPK.</p></form></div></section>`},
+market(){return `<section><div class="wrap"><h2>Marketplace</h2><p class="sub">Demonstration listings plus any you add on the Sell page.</p><details class="fdet"><summary>Filters</summary><div class="filters"><input id="fq" aria-label="Search product" placeholder="Search product" value="${esc(q)}"><select id="fc" aria-label="Category"><option value="">All categories</option>${CATS.map((c,i)=>`<option value="${i}">${c}</option>`).join("")}</select><select id="fcity" aria-label="City"><option value="">All cities</option>${opts(CITIES)}</select><input id="fp" aria-label="Maximum price" type="number" min="0" placeholder="Max price (Rs)"><label><input id="fv" type="checkbox"> Verified only</label></div></details><div class="meta" id="cnt"></div><div class="grid" id="g"></div></div></section>`},
+item(id){const i=all().find(x=>x.id===id);if(!i)return `<section><div class="wrap"><h2>Listing not found</h2><a href="#market">Back to marketplace</a></div></section>`;
+return `<section><div class="wrap"><a href="#market">← Back to marketplace</a><div class="two" style="margin-top:14px"><div><div class="tile" style="height:220px;font-size:16px;border-radius:6px;background-color:${COL[i.c]}">${CATS[i.c]} · placeholder, no photo yet${i.demo?`<img src="images/${i.id}.jpg" alt="${esc(i.t)}" onerror="this.remove()">`:""}</div></div><div><span class="tag">${i.demo?'Demo listing':'Your demo listing'}</span>${i.v?'<span class="tag v">Verified supplier</span>':''}<h2 style="margin-top:8px">${esc(i.t)}</h2><div class="price">${rs(i.p)} <small style="font-size:14px;font-weight:400">per ${i.u.replace(/s$/,"")}</small><s>${rs(i.was)}</s></div><div class="big"><div><small>Available</small><b>${Number(i.q).toLocaleString("en-PK")} ${i.u}</b></div><div><small>Minimum order</small><b>${Number(i.moq).toLocaleString("en-PK")} ${i.u}</b></div><div><small>Location</small><b>${i.city}</b></div><div><small>Condition</small><b style="font-size:16px">${esc(i.cond)}</b></div></div><p class="meta">Seller: ${esc(i.s)} · Listed ${i.d}</p><button class="btn alt" data-save="${i.id}">${store("saved").includes(i.id)?"Saved ✓":"Save listing"}</button><div class="note" style="margin-top:12px"><b>Before you buy:</b> ask for photos or video of the actual stock, confirm the grade and minimum order, inspect in person where possible, and pay a verified business account, not a personal one.</div></div></div>
+<h2 style="margin-top:30px">Send an enquiry</h2><div class="note">This is a demo listing, so your enquiry goes to the SurplusPK team, not to a real seller. We use it to understand demand.</div>
+<form id="eq" data-id="${i.id}"><label class="f">Your name<input name="name" required maxlength="80"></label><label class="f">WhatsApp or email<input name="contact" required maxlength="120"></label><label class="f">Quantity (${i.u})<input name="qty" type="number" min="${i.moq}" max="${i.q}" value="${i.moq}" required></label><label class="f">Your offer per unit (Rs)<input name="offer" type="number" min="1" value="${i.p}" required></label><label class="f">Message<textarea name="msg" rows="3" placeholder="Delivery city, payment terms, inspection…"></textarea></label><button class="btn">Submit enquiry</button><p class="meta" id="eqm"></p></form></div></section>`},
+sell(){const o=CATS.map((c,i)=>`<option value="${i}">${c}</option>`).join("");return `<section><div class="wrap"><h2>List surplus inventory</h2><div class="note">This is an early prototype. Submitting sends your listing request to the SurplusPK team for review. A preview also appears in your own browser, marked Pending approval.</div><form id="sf" novalidate><p class="meta" id="sp" aria-live="polite"></p><div class="prog"><i id="pb"></i></div>
+<fieldset><legend>1. Product</legend><label class="f">Product title<input name="t" required maxlength="80"></label><label class="f">Category<select name="c">${o}</select></label><label class="f">Grade<select name="grade"><option>Grade A</option><option>Grade B</option><option>Mixed grades</option><option>Not graded</option></select></label><label class="f">Condition<input name="cond" value="New" required></label></fieldset>
+<fieldset><legend>2. Quantity and price</legend><label class="f">City<select name="city">${opts(CITIES)}</select></label><label class="f">Unit<select name="u"><option>pieces</option><option>metres</option><option>cartons</option><option>kg</option><option>pairs</option></select></label><label class="f">Available quantity<input name="q" type="number" min="1" required></label><label class="f">Minimum order quantity<input name="moq" type="number" min="1" required></label><label class="f">Asking price per unit (Rs)<input name="p" type="number" min="1" required></label></fieldset>
+<fieldset><legend>3. Your details and review</legend><label class="f">Your name<input name="name" required maxlength="80"></label><label class="f">WhatsApp or email<input name="contact" required maxlength="120"></label><div class="note" id="rv"></div></fieldset>
+<div class="row"><button type="button" class="btn alt" id="bk">Back</button><button type="button" class="btn" id="nx">Next</button><button class="btn" id="go">Confirm and send</button></div><p class="meta" id="sm" role="status"></p></form></div></section>`},
+login(){return `<section><div class="wrap"><h2>Demo login</h2><div class="note">Prototype only: there are no real accounts or passwords. Pick a role to preview its dashboard.</div><div class="row"><button class="btn" data-role="buyer">Buyer</button><button class="btn" data-role="seller">Seller</button><button class="btn" data-role="admin">Admin</button></div></div></section>`},
+dash(){const r=getRole();if(!r)return pages.login();const E=store("enq"),M=store("mine"),A=all();
+const T=e=>{const i=A.find(x=>x.id===e.listing);return i?esc(i.t):"Listing"};
+const act=(e,n)=>{const s=e.status||"Pending";if(r==="buyer")return (s==="Countered"?`<button class="btn" data-a="accept" data-n="${n}">Accept counter</button>`:"")+(s==="Pending"||s==="Countered"?`<button class="btn alt" data-a="withdraw" data-n="${n}">Withdraw</button>`:"");return s==="Pending"||s==="Countered"?`<button class="btn" data-a="accept" data-n="${n}">Accept</button><button class="btn alt" data-a="reject" data-n="${n}">Reject</button><button class="btn alt" data-a="counter" data-n="${n}">Counter</button>`:""};
+const O=E.filter(e=>e.status==="Accepted"),P=(()=>{try{return JSON.parse(localStorage.getItem("profile")||"{}")}catch(x){return {}}})();
+const pend=E.filter(e=>(e.status||"Pending")==="Pending").length,acc=E.filter(e=>e.status==="Accepted").length;
+const st=r==="buyer"?[["My enquiries",E.length],["Pending",pend],["Accepted",acc]]:[["Active listings",A.length],["My listings",M.length],["Enquiries",E.length],["Pending",pend]];
+return `<section><div class="wrap"><div class="row" style="justify-content:space-between;align-items:center"><h2>${r[0].toUpperCase()+r.slice(1)} dashboard</h2><button class="btn alt" data-a="logout">Switch role</button></div><div class="note">Demo: this browser plays both sides, so enquiries you send as a buyer appear here for the seller to answer. This dashboard is a demo preview and does not read from the database.</div><div class="big">${st.map(x=>`<div><small>${x[0]}</small><b>${x[1]}</b></div>`).join("")}</div><h3>Enquiries and negotiation</h3><div style="overflow-x:auto"><table class="rt"><tr><th>Listing</th><th>Qty</th><th>Offer</th><th>Counter</th><th>Status</th><th></th></tr>${E.map((e,n)=>`<tr><td data-l="Listing">${T(e)}</td><td data-l="Qty">${esc(e.qty)}</td><td data-l="Offer">${rs(e.offer)}</td><td data-l="Counter">${e.counter?rs(e.counter):"–"}</td><td data-l="Status"><b>${e.status||"Pending"}</b></td><td>${act(e,n)}</td></tr>`).join("")||'<tr><td colspan="6">No enquiries yet. Open a listing and send one.</td></tr>'}</table></div><h3 style="margin-top:28px">Orders</h3>${O.length?`<div style="overflow-x:auto"><table class="rt"><tr><th>Listing</th><th>Qty</th><th>Agreed price</th></tr>${O.map(e=>`<tr><td data-l="Listing">${T(e)}</td><td data-l="Qty">${esc(e.qty)}</td><td data-l="Price">${rs(e.counter||e.offer)}</td></tr>`).join("")}</table></div>`:'<p class="meta">Accepted enquiries become orders here.</p>'}<h3 style="margin-top:28px">Business profile</h3><form id="pf"><label class="f">Business name<input name="bn" value="${esc(P.bn||"")}"></label><label class="f">City<input name="bc" value="${esc(P.bc||"")}"></label><label class="f">WhatsApp<input name="bw" value="${esc(P.bw||"")}"></label><button class="btn">Save profile</button><p class="meta" id="pm" role="status"></p></form>${r==="buyer"?`<h3 style="margin-top:28px">Saved listings</h3>${store("saved").map(id=>A.find(x=>x.id===id)).filter(Boolean).map(i=>`<p><a href="#item-${i.id}">${esc(i.t)}</a> · ${rs(i.p)}</p>`).join("")||'<p class="meta">No saved listings yet. Open a listing and tap Save.</p>'}`:""}${r!=="buyer"?`<h3 style="margin-top:28px">${r==="admin"?"Manage your demo listings":"My listings"}</h3><div style="overflow-x:auto"><table class="rt">${M.map(i=>`<tr><td data-l="Listing">${esc(i.t)}</td><td data-l="Status">${i.st||"Published"}</td><td data-l="Price">${rs(i.p)}</td><td>${r==="admin"&&i.st==="Pending approval"?`<button class="btn" data-pub="${i.id}">Approve</button>`:""}${i.st!=="Archived"?`<button class="btn alt" data-arc="${i.id}">Archive</button>`:""}<button class="btn alt" data-del="${i.id}">Remove</button></td></tr>`).join("")||'<tr><td>You have not added any listings. Use Sell surplus.</td></tr>'}</table></div>`:""}</div></section>`},
+how(){const B=["Create an account and complete the business profile","Search by category, city, quantity and price","Open a listing and review photos and specifications","Send an enquiry with quantity and proposed price","Negotiate price and quantity with the seller","Track the enquiry and order status"],S=["Register a business account and submit verification details","Open the seller dashboard and choose List Surplus Inventory","Upload photos, add title, category, location and quantity","Set minimum order quantity and asking price, then publish","Receive and review buyer enquiries","Accept, reject or counter-offer and manage buyers"];
+return `<section><div class="wrap"><h2>How it works</h2><p class="sub">The complete journey for both sides.</p><div class="two"><div><h3>Buyer journey</h3><ol class="steps">${B.map(x=>`<li>${x}</li>`).join("")}</ol></div><div><h3>Seller journey</h3><ol class="steps">${S.map(x=>`<li>${x}</li>`).join("")}</ol></div></div>
+<h2 style="margin-top:36px">Prototype status</h2><div class="note"><b>Working in this prototype:</b> landing page, marketplace search and filters, listing pages, enquiry form, sell form, demo login with buyer, seller and admin dashboards, and a basic offer, counter-offer, accept and reject flow. Enquiries, listing requests and the join form are recorded in a database when it is connected. The dashboards are demo previews saved in your browser.<br><br><b>Not built yet:</b> real accounts and passwords, dashboards that read from the database, photo upload, business verification, admin approval of listings, notifications. These need the full Next.js and Supabase build.</div></div></section>`}};
+function draw(){const g=$("#g");if(!g)return;const t=$("#fq").value.toLowerCase(),c=$("#fc").value,ci=$("#fcity").value,p=+$("#fp").value||0,v=$("#fv").checked;
+const r=all().filter(i=>(!t||i.t.toLowerCase().includes(t))&&(c===""||i.c==c)&&(!ci||i.city===ci)&&(!p||i.p<=p)&&(!v||i.v)&&i.st!=="Archived");
+$("#cnt").textContent=r.length+" listing"+(r.length==1?"":"s");g.innerHTML=r.map(card).join("")||"<p>No listings match. Try clearing a filter.</p>"}
+function route(){const h=location.hash.slice(1)||"home";
+app.innerHTML=h.startsWith("item-")?pages.item(h.slice(5)):(pages[h]||pages.home)();
+window.scrollTo(0,0);$("#nv").classList.remove("open");$("#mt").setAttribute("aria-expanded","false");document.title="SurplusPK – "+(h.startsWith("item-")?"Listing":h[0].toUpperCase()+h.slice(1));app.focus({preventScroll:true});
+if(h==="market"){["fq","fc","fcity","fp","fv"].forEach(x=>$("#"+x).addEventListener("input",draw));$("#fc").value=cat;cat="";if(innerWidth>720)$(".fdet").open=true;draw()}
+if(h==="home"){$("#hs").onsubmit=e=>{e.preventDefault();q=$("#hq").value;cat="";location.hash="#market"};
+document.querySelectorAll("[data-cat]").forEach(a=>a.onclick=()=>{q="";cat=a.dataset.cat});
+$("#ea").onsubmit=e=>{e.preventDefault();send("waitlist",Object.fromEntries(new FormData(e.target)),$("#eam"),e.target)}}
+if(h==="sell"){const F=$("#sf"),fs=[...F.querySelectorAll("fieldset")];let n=0;
+try{const d=JSON.parse(localStorage.getItem("draft")||"{}");for(const k in d)if(F.elements[k])F.elements[k].value=d[k]}catch(x){}
+F.addEventListener("input",()=>{try{localStorage.setItem("draft",JSON.stringify(Object.fromEntries(new FormData(F))))}catch(x){}});
+const show=()=>{fs.forEach((x,i)=>x.hidden=i!==n);$("#bk").hidden=n==0;$("#nx").hidden=n==2;$("#go").hidden=n!=2;$("#sp").textContent="Step "+(n+1)+" of 3 · draft saves automatically";$("#pb").style.width=(n+1)*33.3+"%";
+ if(n==2){const f=Object.fromEntries(new FormData(F));$("#rv").innerHTML="<b>"+esc(f.t)+"</b><br>"+CATS[+f.c]+" · "+f.grade+" · "+esc(f.cond)+"<br>"+esc(f.q)+" "+f.u+" in "+f.city+" · minimum order "+esc(f.moq)+"<br>Asking "+rs(f.p||0)+" per unit"}};
+$("#nx").onclick=()=>{if([...fs[n].querySelectorAll("input,select")].every(i=>i.reportValidity())){n++;show()}};
+$("#bk").onclick=()=>{n--;show()};show();
+F.onsubmit=async e=>{e.preventDefault();if(![...fs[2].querySelectorAll("input")].every(i=>i.reportValidity()))return;const f=Object.fromEntries(new FormData(F));
+const ok=await send("listing_requests",{name:f.name,contact:f.contact,title:f.t,category:CATS[+f.c],city:f.city,qty:+f.q,unit:f.u,moq:+f.moq,price:+f.p,condition:f.grade+" · "+f.cond},$("#sm"),null);
+if(ok){const m=store("mine");m.unshift({id:"m"+Date.now(),t:f.t,c:+f.c,city:f.city,q:+f.q,u:f.u,moq:+f.moq,p:+f.p,was:+f.p,cond:f.grade+" · "+f.cond,s:"Your business",v:0,d:"just now",st:"Pending approval"});store("mine",m);try{localStorage.removeItem("draft")}catch(x){}}}}
+if(h.startsWith("item-")){$("#eq").onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),id=e.target.dataset.id,it=all().find(x=>x.id===id);
+const ok=await send("enquiries",{listing_id:id,listing_title:it?it.t:"",qty:+f.qty,offer:+f.offer,name:f.name,contact:f.contact,message:f.msg||""},$("#eqm"),null);
+if(ok){const l=store("enq");l.push({listing:id,qty:f.qty,offer:f.offer,msg:f.msg});store("enq",l)}}}}
+const getRole=()=>{try{return localStorage.getItem("role")||""}catch(x){return ""}};
+app.addEventListener("submit",e=>{if(e.target.id!=="pf")return;e.preventDefault();try{localStorage.setItem("profile",JSON.stringify(Object.fromEntries(new FormData(e.target))));$("#pm").textContent="Saved in this browser."}catch(x){$("#pm").textContent="Could not save."}});
+$("#mt").onclick=()=>{const o=$("#nv").classList.toggle("open");$("#mt").setAttribute("aria-expanded",o)};
+app.addEventListener("click",e=>{const b=e.target.closest("[data-role],[data-a],[data-del],[data-save],[data-pub],[data-arc]");if(!b)return;
+if(b.dataset.pub||b.dataset.arc){const id=b.dataset.pub||b.dataset.arc;store("mine",store("mine").map(i=>i.id===id?{...i,st:b.dataset.pub?"Published":"Archived"}:i));route();return}
+if(b.dataset.save){const l=store("saved"),k=b.dataset.save,x=l.indexOf(k);x<0?l.push(k):l.splice(x,1);store("saved",l);b.textContent=x<0?"Saved ✓":"Save listing";return}
+if(b.dataset.role){try{localStorage.setItem("role",b.dataset.role)}catch(x){}location.hash="#dash";route();return}
+if(b.dataset.del){store("mine",store("mine").filter(i=>i.id!==b.dataset.del));route();return}
+const a=b.dataset.a;if(a==="logout"){try{localStorage.removeItem("role")}catch(x){}route();return}
+const E=store("enq"),x=E[+b.dataset.n];if(!x)return;
+if(a==="accept")x.status="Accepted";else if(a==="reject")x.status="Rejected";else if(a==="withdraw")x.status="Withdrawn";else if(a==="counter"){const p=prompt("Counter price per unit (Rs)",x.offer);if(!p||isNaN(p))return;x.counter=+p;x.status="Countered"}
+store("enq",E);route()});
+addEventListener("hashchange",route);route();
+</script></body></html>
